@@ -1,0 +1,11 @@
+{
+  "name": "rill",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Rill: a sandboxed programming language whose whole world is the visible page.",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  }
+}

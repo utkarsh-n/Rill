@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Rill is a small programming language whose whole world is the visible page: instruments, units, provenance and time you can scrub.">
+  <title>Rill</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060B0F'/%3E%3Cpath d='M5 19c4-6 7-6 11 0s7 6 11 0' fill='none' stroke='%2357EDF5' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/rill.css">
+  <script type="module" src="/src/host/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#editor-input">Skip to the program</a>
+  <header class="bar">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 19c4-6 7-6 11 0s7 6 11 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+      <h1>Rill</h1>
+      <p class="tagline">A language whose whole world is this page.</p>
+    </div>
+    <div class="bar-actions">
+      <label class="select">
+        <span class="sr">Example program</span>
+        <select id="examples" aria-label="Example program"></select>
+      </label>
+      <button id="motion" class="chip" type="button" hidden>Use motion</button>
+      <button id="sound" class="chip" type="button" aria-pressed="false">Sound off</button>
+      <button id="share" class="chip" type="button">Copy link</button>
+    </div>
+  </header>
+
+  <main class="lab">
+    <section class="code" aria-label="Program">
+      <div class="panel-head">
+        <span class="label">Program</span>
+        <span id="compile-state" class="state" role="status"></span>
+      </div>
+      <div class="editor" id="editor">
+        <div class="gutter" id="gutter" aria-hidden="true"></div>
+        <div class="editor-scroll">
+          <pre class="highlight" id="highlight" aria-hidden="true"></pre>
+          <textarea id="editor-input" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Rill program" aria-describedby="diagnostics"></textarea>
+        </div>
+      </div>
+      <ul class="diagnostics" id="diagnostics" aria-live="polite"></ul>
+      <div class="panel-head">
+        <span class="label">State</span>
+        <span class="note">Every value the program holds, as it runs.</span>
+      </div>
+      <div class="inspector" id="inspector"></div>
+    </section>
+
+    <section class="stage-wrap" aria-label="Stage">
+      <div class="stage" id="stage"></div>
+      <div class="fault" id="fault" role="alert" hidden></div>
+    </section>
+  </main>
+
+  <footer class="timebar" aria-label="Time">
+    <button id="play" class="round" type="button" aria-label="Pause">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path id="play-icon" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+    </button>
+    <button id="step" class="round" type="button" aria-label="Step one tick">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5l9 7-9 7zM16 5h3v14h-3z"/></svg>
+    </button>
+    <button id="restart" class="round" type="button" aria-label="Run from the start">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.6 4.7l1.9.6A5 5 0 1 0 12 7v3L7.5 6 12 2z"/></svg>
+    </button>
+    <div class="scrub">
+      <input id="scrub" type="range" min="0" max="0" value="0" step="1" aria-label="Scrub through the last minute">
+      <div class="time"><span id="time">t = 0.00 s</span><span id="live" class="live">live</span></div>
+    </div>
+    <label class="select speed">
+      <span class="sr">Speed</span>
+      <select id="speed" aria-label="Speed">
+        <option value="0.25">¼×</option>
+        <option value="0.5">½×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select>
+    </label>
+  </footer>
+
+  <section class="reference" aria-labelledby="ref-title">
+    <h2 id="ref-title">What a program can reach</h2>
+    <p class="ref-intro">
+      Nothing outside this page exists to a Rill program. There are no strings, no network, no files and no clock but the page's own.
+      A program sees only the instruments it names with <code>use</code>, and only the settings, readings, actions and events each one lists below.
+      Every number has a unit, checked before it runs. Every value carries where it came from: <span class="prov" data-prov="set">set</span>
+      <span class="prov" data-prov="live">live</span> <span class="prov" data-prov="modelled">modelled</span> <span class="prov" data-prov="simulated">simulated</span>
+      <span class="prov" data-prov="illustrative">illustrative</span>, and a result is only as sure as its least sure input.
+    </p>
+    <div class="ref-grid" id="reference"></div>
+    <details class="syntax">
+      <summary>The language in one screen</summary>
+      <pre class="ref-code" id="syntax"></pre>
+    </details>
+  </section>
+</body>
+</html>
